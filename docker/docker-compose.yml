@@ -1,0 +1,50 @@
+version: '3'
+name: 'binakodu'
+services:
+
+  #PHP Service
+  binakodu_php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: php81_binakodu
+    container_name: binakodu_php
+    tty: true
+    #Productionda bunun açılması gerekir.
+    #restart: unless-stopped
+    environment:
+      SERVICE_NAME: binakodu_php
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - ../:/var/www:delegated
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini:delegated
+      - ./php/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini:delegated
+    networks:
+      - binakodu_network
+
+  #Nginx Service
+  binakodu_webserver:
+    image: nginx:alpine
+    container_name: binakodu_webserver
+    tty: true
+    #Productionda bunun açılması gerekir.
+    #restart: unless-stopped
+    ports:
+      - "82:80"
+      - "446:443"
+    volumes:
+      - ../:/var/www:delegated
+      - ./nginx/conf.d/:/etc/nginx/conf.d/:delegated
+      - ./nginx/certs:/etc/nginx/certs:delegated
+    networks:
+      - binakodu_network
+
+  
+#Docker Networks
+networks:
+  binakodu_network:
+    driver: bridge
+
+#Volumes
+# volumes:
