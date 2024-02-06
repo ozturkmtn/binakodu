@@ -44,6 +44,25 @@ class BinaKodu {
         ]);
     }
 
+    public function login($params)
+    {
+        ob_start();
+
+        $username = $params['username'];
+        $password = $params['password'];
+        $pass = md5('binase3'.$password);
+
+        $result = $this->db->findOneBy('users',"username = '$username' AND password = '$pass'");
+        if (is_array($result) && $result['username'] = $username) {
+
+            $_SESSION["login"] = "true";
+            $_SESSION["username"] = $username;
+            $_SESSION["password"] = $password;
+            $_SESSION["role"] = $result['role'];
+        }
+        header("Location:/");
+    }
+
     public function render()
     {
         include "pages/$file.php";
@@ -56,6 +75,12 @@ class BinaKodu {
         }
 
         return null;
+    }
+
+    function redirect($url, $statusCode = 303)
+    {
+        header('Location: ' . $url, true, $statusCode);
+        die();
     }
 }
 

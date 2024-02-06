@@ -45,6 +45,17 @@ function findById($table, $id) {
    }
 }
 
+    function findOneBy($table, $cond = '') {
+        try {
+            $stmt = $this->conn->prepare("SELECT * FROM $table WHERE $cond");
+            $result = $stmt->execute();
+
+            return $stmt->fetch();
+        } catch (PDOException $e) {
+            echo 'Error: ' . $e->getMessage();
+        }
+    }
+
 function select($tbl, $cond='') {
     $sql = "SELECT * FROM $tbl";
     if ($cond!='') {
