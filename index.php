@@ -79,6 +79,22 @@ $router->post('/new', function ($params){
     render('new', ['building' => $building]);
 });
 
+$router->get('/edit/([\d]+)', function($id){
+
+    $binaKodu = new BinaKodu();
+    $building = $binaKodu->db->findById('buildings',$id);
+
+    render('edit', ['building' => $building]);
+});
+
+$router->post('/update', function ($params){
+
+    $binaKodu = new BinaKodu();
+    $building = $binaKodu->update($params);
+
+    $binaKodu->redirect('/print/'. $building['id']);
+});
+
 $router->get('/logout', function (){
     ob_start();
     session_destroy();

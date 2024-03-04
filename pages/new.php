@@ -71,6 +71,18 @@ include 'header.php';
             <input type="text" class="form-control" id="report_date" name="report_date" readonly>
         </div>
         <div class="col-md-6">
+            <label for="report_date" class="form-label">Müteahhit</label>
+            <input type="text" class="form-control" id="contractor" name="contractor" placeholder="Müteahhit">
+        </div>
+        <div class="col-md-6">
+            <label for="house_status" class="form-label">Ev Durumu</label>
+            <select class="form-select" id="house_status" name="house_status">
+                <option>Seçiniz</option>
+                <option value="1" selected>Satılık</option>
+                <option value="2">Kiralık</option>
+            </select>
+        </div>
+        <div class="col-md-6">
             <label for="health_status" class="form-label">Bina Durumu</label>
             <select class="form-select" id="health_status" name="health_status">
                 <option>Seçiniz</option>

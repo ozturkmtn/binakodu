@@ -27,7 +27,9 @@ include 'header.php';
             <div><strong>Cadde / Sokak:</strong> <?=$params['building']['street']??'-';?></div>
             <div><strong>Bina No:</strong> <?=$params['building']['building_no']??'-';?></div>
             <div><strong>Adres:</strong> <?=$params['building']['address']??'-';?></div>
+            <div><strong>Müteahhit:</strong> <?=$params['building']['contractor']??'-';?></div>
             <div><strong>Kontrol Tarihi:</strong> <?=$binaKodu->dateFormat($params['building']['report_date']);?></div>
+            <div><strong>Ev Durumu:</strong> <?=($params['building']['house_status'] === null) ? '-' : \App\Constants::$houseStatus[$params['building']['house_status']]??'';?></div>
             <div><strong>Bina Durumu:</strong> <?=($params['building']['health_status'] === null) ? '-' : ( ($params['building']['health_status'] == 1)?'Sağlam':'Uygun Değil' );?></div>
             <div><strong>DASK Durumu:</strong> <?=($params['building']['dask_status'] === null) ? '-' : ( ($params['building']['dask_status'] == 1)?'Evet':'Hayır' );?></div>
         </div>

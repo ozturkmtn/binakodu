@@ -5,7 +5,7 @@ use App\Database;
 
 class BinaKodu {
 
-    private $db;
+    public $db;
 
     public function __construct()
     {
@@ -38,10 +38,48 @@ class BinaKodu {
             'street' => $params['street']??'',
             'address' => $params['address']??'',
             'building_no' => $params['building_no']??0,
+            'contractor' => $params['contractor']??'',
             'report_date' => ($reportDate instanceof \DateTime) ? $reportDate->format('Y-m-d') : '',
             'health_status' => $params['health_status']??0,
+            'house_status' => $params['house_status']??0,
             'dask_status' => $params['dask_status']??0,
         ]);
+    }
+
+    public function update($params)
+    {
+        $building = $this->db->findById('buildings',$params['id']);
+
+        if (!empty($building)) {
+
+
+            $reportDate = isset($params['report_date']) && !empty($params['report_date']) ? date_create_from_format('d/m/Y', $params['report_date']) : '';
+
+            $this->db->update('buildings', [
+                'city' => $params['city']??'',
+                'town' => $params['town']??'',
+                'neighbourhood' => $params['neighbourhood']??'',
+                'street' => $params['street']??'',
+                'address' => $params['address']??'',
+                'building_no' => $params['building_no']??0,
+                'contractor' => $params['contractor']??'',
+                'report_date' => ($reportDate instanceof \DateTime) ? $reportDate->format('Y-m-d') : '',
+                'health_status' => $params['health_status']??0,
+                'house_status' => $params['house_status']??0,
+                'dask_status' => $params['dask_status']??0,
+            ], "id = ". $params['id']);
+
+            return $this->db->findById('buildings',$params['id']);
+        }
+        else {
+            die('Error:: Update');
+        }
+    }
+
+    public function edit($id)
+    {
+        // edit page
+
     }
 
     public function login($params)

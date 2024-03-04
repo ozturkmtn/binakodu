@@ -6,6 +6,7 @@
 <head>
     <title>Anasayfa</title>
 
+
     <style>
         h1 {
             text-align: center;
@@ -62,7 +63,7 @@ include 'header.php';
             <img src="./assets/img/logo-gyio.jpg" alt="logo-gyio" class="img-fluid">
         </div>
 
-        <div class="" style="padding: 30px">
+        <div class="" style="padding: 30px;display: none;">
             <h4>QR Kodu Deşifresi</h4>
             <div id="scan_result">...</div>
         </div>
@@ -73,7 +74,7 @@ include 'header.php';
 <script type="text/javascript">
     // // Setting up Qr Scanner properties
     const html5QrCode = new Html5Qrcode("reader");
-    const config = {fps: 10, qrbox: {width: 250, height: 250}};
+    const config = {fps: 10, qrbox: {width: 250, height: 250}, aspectRatio:1};
 
     // // When scan is successful fucntion will produce data
     function onScanSuccess(qrCodeMessage,qrCodeResult) {

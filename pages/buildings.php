@@ -54,6 +54,7 @@ include 'header.php';
                         <td class="align-middle text-center">
                             <div class="d-grid gap-2 d-md-block">
                                 <a href="/print/<?=$building['id']??'0';?>" id="qrcode_print" data-id="<?=$building['id']??'0';?>" class="btn btn-xs btn-outline-primary">Detay / Yazdır</a>
+                                <a href="/edit/<?=$building['id']??'0';?>" id="edit" data-id="<?=$building['id']??'0';?>" class="btn btn-xs btn-outline-success mt-2">Düzenle</a>
                             </div>
                         </td>
                     </tr>
